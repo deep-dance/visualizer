@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <div class="content">
-    <div class="v-spacer-large"></div>
-    <h1>deep.dance | visualizer</h1>
-    </div>
     <DanceScene />
-    <div class="content">
+    <ControlBar v-if="this.$store.state.isPublicMode"/>
+    <div class="content" v-if="!this.$store.state.isPublicMode">
       <ControlBar />
-      <Upload dataKey='red'/>
-      <Upload dataKey='green'/>
-      <Upload dataKey='blue'/>
+      <Upload dataKey='red' v-if="!this.$store.state.isPublicMode"/>
+      <Upload dataKey='green' v-if="!this.$store.state.isPublicMode"/>
+      <Upload dataKey='blue' v-if="!this.$store.state.isPublicMode"/>
       <!-- <DMXSender /> -->
       <!-- <LEDSim /> -->
       <!-- <b-button
@@ -27,8 +24,10 @@
 import DanceScene from "./components/DanceScene.vue";
 import ControlBar from "./components/ControlBar";
 import Upload from "./components/Upload";
-// import DMXSender from "./components/DMXSender";
-// import LEDSim from "./components/LEDSim";
+
+import json_red from './deepdance_170421_red.json'
+// import json_blue from './deepdance_170421_blue.json'
+// import json_green from './deepdance_170421_green.json'
 
 export default {
   name: "App",
@@ -45,7 +44,11 @@ export default {
     },
   },
   mounted() {
-
+    if (this.$store.state.isPublicMode) {
+      this.$store.commit("SetJSONData", {data:json_red, key:"red"});
+      // this.$store.commit("SetJSONData", {data:json_blue, key:"blue"});
+      // this.$store.commit("SetJSONData", {data:json_green, key:"green"});
+    }
   },
 };
 </script>
@@ -57,7 +60,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 300px;
+  /* margin-bottom: 300px; */
 }
 .left {
   float: left;
@@ -66,7 +69,6 @@ export default {
   width: 85%;
   margin: 0 auto;
   background-color: white;
-  box-shadow: 0px 0px 15px black;
   padding: 30px;
   /* height: 80px; */
   min-height: 40px;

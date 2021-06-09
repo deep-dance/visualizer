@@ -23,19 +23,25 @@
           {{ this.convertFrameToTime(
             Object.keys(this.$store.state.currentJSONData["red"].frames).length) 
           }}
-          ({{ this.$store.state.currentFrame }}
-            /
-          {{
-            Object.keys(this.$store.state.currentJSONData["red"].frames).length
-          }})
+          <span v-if="!this.$store.state.isPublicMode">
+            ({{ this.$store.state.currentFrame }}
+              /
+            {{
+              Object.keys(this.$store.state.currentJSONData["red"].frames).length
+            }})
+          </span>
+          
         </div>
-        Jump to
+        <span v-if="!this.$store.state.isPublicMode">
+          Jump to
+        </span>
         <input
           @change="SetTime"
           value=""
           type="text"
           ref="timeInput"
           placeholder="mm:ss"
+          v-if="!this.$store.state.isPublicMode"
         />
       </div>
     </div>
@@ -123,6 +129,18 @@ export default {
 <style scoped>
 #playhead {
   height: 50px;
+  position: absolute;
+  top: 90vh;
+  left: 25%;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #d5d5d5;
+}
+@media (max-width: 760px) {
+  #playhead {
+    width: 90%;
+    left: 5%;
+  }
 }
 #controlBar {
   min-height: 50px;
@@ -131,7 +149,7 @@ export default {
 .icon {
   width: 30px;
   height: 30px;
-  margin-right: 3px;
+  margin: 10px;
   display: inline-block;
   vertical-align: middle;
 }

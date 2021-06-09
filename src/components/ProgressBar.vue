@@ -42,11 +42,16 @@ export default {
   height: 10px;
 
   width: 500px;
-  background-color: rgb(196, 196, 196);
+  background-color: #d5d5d5;
   display: inline-block;
 }
 .progressbar-inner {
   height: 10px;
   background-color: rgb(0, 0, 0);
+}
+@media (max-width: 760px) {
+  #progressbar-outer, .progressbar-inne {
+    display: none;
+  }
 }
 </style>

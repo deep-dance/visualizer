@@ -21,7 +21,8 @@ export const store = new Vuex.Store({
         dmxActive: false,
         addMinVal: true,
         slowMo: true,
-        fps: 25
+        fps: 25,
+        isPublicMode: true, 
     },
     mutations: {
         SetJSONData(state, data) {

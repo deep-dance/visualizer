@@ -48,9 +48,9 @@ export default {
       controls.update();
 
       //FloorPlane
-      const planeGeometry = new THREE.PlaneGeometry(20, 20, 32);
+      const planeGeometry = new THREE.PlaneGeometry(60, 60, 32);
       const planeMaterial = new THREE.MeshStandardMaterial({
-        color: 0xaaaaaa,
+        color: 0x444444,
         //side: THREE.DoubleSide,
       });
       const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -89,7 +89,7 @@ export default {
         this.container.clientWidth,
         this.container.clientHeight
       );
-      this.renderer.setClearColor( 0xffffff, 1);
+      this.renderer.setClearColor( 0x000011, 1);
       this.container.appendChild(this.renderer.domElement);
     },
 
@@ -194,12 +194,12 @@ export default {
 
         this.delta = this.delta % interval;
       }
-      this.renderer.setClearColor(0xffffff);
+      this.renderer.setClearColor(0x000011);
       this.renderer.render(this.scene, this.camera);
       
     },
     onDataChanged() {
-      console.log("Update JSON Data");
+      console.log('Update JSON Data');
       this.removeFigure();
       //this.$store.commit("SetCurrentFrame", 0);
       this.$store.commit("SetAnimationStatus", false);
@@ -237,10 +237,11 @@ export default {
 
 <style>
 #scene {
-  height: 800px;
-  width: 85%;
+  position: relative;
+  top: 0px;
+  height: 100vh;
+  width: 100%;
   margin: auto;
-  box-shadow: 0px 0px 15px black;
 }
 
 </style>

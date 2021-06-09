@@ -28,6 +28,7 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       var reader = new FileReader();
       reader.onload = this.onReaderLoad;
+      alert(files);
       reader.readAsText(files[0]);
       this.$store.commit("SetCurrentFilename", {data:files[0].name, key:this.dataKey});
     },
