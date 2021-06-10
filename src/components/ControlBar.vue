@@ -130,7 +130,7 @@ export default {
 #playhead {
   height: 50px;
   position: absolute;
-  top: 90vh;
+  top: 85vh;
   left: 25%;
   width: 50%;
   background-color: rgba(0, 0, 0, 0.5);
