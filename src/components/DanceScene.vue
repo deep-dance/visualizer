@@ -64,8 +64,8 @@ export default {
       const pointLight = new THREE.PointLight(0xffffff, 3);
       pointLight.position.set(0, 6, 0);
       pointLight.castShadow = true;
-      pointLight.shadow.mapSize.width = 1024; // default
-      pointLight.shadow.mapSize.height = 1024; // default
+      pointLight.shadow.mapSize.width = 2048; // default
+      pointLight.shadow.mapSize.height = 2048; // default
       pointLight.shadow.camera.near = 1; // default
       pointLight.shadow.camera.far = 1000; // default
       this.scene.add(pointLight);
