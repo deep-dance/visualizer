@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <DanceScene />
-    <ControlBar v-if="this.$store.state.isPublicMode"/>
+    <ControlBar v-if="this.$store.state.isPublicMode" />
     <div class="content" v-if="!this.$store.state.isPublicMode">
       <ControlBar />
-      <Upload dataKey='red' v-if="!this.$store.state.isPublicMode"/>
-      <Upload dataKey='green' v-if="!this.$store.state.isPublicMode"/>
-      <Upload dataKey='blue' v-if="!this.$store.state.isPublicMode"/>
+      <Upload dataKey="red" v-if="!this.$store.state.isPublicMode" />
+      <Upload dataKey="green" v-if="!this.$store.state.isPublicMode" />
+      <Upload dataKey="blue" v-if="!this.$store.state.isPublicMode" />
       <!-- <DMXSender /> -->
       <!-- <LEDSim /> -->
       <!-- <b-button
@@ -16,7 +16,6 @@
       @click="toogleSlowMo()"
       >Activate SlowMo</b-button> -->
     </div>
-    
   </div>
 </template>
 
@@ -25,9 +24,9 @@ import DanceScene from "./components/DanceScene.vue";
 import ControlBar from "./components/ControlBar";
 import Upload from "./components/Upload";
 
-import json_red from './deepdance_170421_red.json'
-// import json_blue from './deepdance_170421_blue.json'
-// import json_green from './deepdance_170421_green.json'
+import json_red from "./deepdance_170421_red.json";
+import json_blue from "./deepdance_170421_blue.json";
+import json_green from "./deepdance_170421_green.json";
 
 export default {
   name: "App",
@@ -39,13 +38,28 @@ export default {
     // DMXSender
   },
   methods: {
-    toogleSlowMo: function() {
+    toogleSlowMo: function () {
       this.$store.commit("SetSlowMo", !this.$store.state.slowMo);
     },
   },
   mounted() {
     if (this.$store.state.isPublicMode) {
-      this.$store.commit("SetJSONData", {data:json_red, key:"red"});
+      console.log(this.$route.params);
+      switch (this.$route.params.figureIdx) {
+        case "0":
+          this.$store.commit("SetJSONData", { data: json_red, key: "red" });
+          break;
+        case "1":
+          this.$store.commit("SetJSONData", { data: json_blue, key: "red" });
+          break;
+        case "2":
+          this.$store.commit("SetJSONData", { data: json_green, key: "red" });
+          break;
+        default:
+          this.$store.commit("SetJSONData", { data: json_red, key: "red" });
+          break;
+      }
+      //this.$store.commit("SetJSONData", {data:json_red, key:"red"});
       // this.$store.commit("SetJSONData", {data:json_blue, key:"blue"});
       // this.$store.commit("SetJSONData", {data:json_green, key:"green"});
     }
@@ -76,7 +90,8 @@ export default {
 .v-spacer-large {
   /* height: 80px; */
 }
-.btn_active, .not-collapsed {
+.btn_active,
+.not-collapsed {
   background-color: lightsalmon !important;
 }
 </style>

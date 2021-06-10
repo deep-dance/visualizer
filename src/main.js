@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import { store } from './store'
+import VueRouter from 'vue-router'
+
+
 // import DMX from 'dmx'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -14,11 +17,28 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
+const router = new VueRouter({ 
+  routes: [
+    {
+      path: "/", 
+      component: App 
+    },
+    {
+      path: "/:figureIdx", 
+      component: App 
+    }
+  ]
+ 
+},
+)
+
 new Vue({
   store,
+  router,
   render: h => h(App)
   // render(h) {
   //   if (window.location.pathname == '/dmx')

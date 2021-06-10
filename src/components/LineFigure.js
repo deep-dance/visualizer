@@ -23,7 +23,7 @@ class LineFigure {
             sizeAttenuation: true,
             lineWidth: 0.03,
         });
-        console
+
     }
 
     CreateLines(idx) {

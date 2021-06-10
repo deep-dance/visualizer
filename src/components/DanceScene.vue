@@ -95,7 +95,6 @@ export default {
         this.container.clientHeight
       );
       //this.renderer.setClearColor( 0x333333, 1);
-      
 
       this.container.appendChild(this.renderer.domElement);
     },
@@ -112,21 +111,63 @@ export default {
     },
 
     initFigure: function () {
-      this.linesFigRed = new LineFigure(this.$store, 0xb8d8d8, {
-        x: 0,
-        y: 0,
-        z: 0,
-      },'red');
-      this.linesFigGreen = new LineFigure(this.$store, 0x3caea3, {
-        x: -4,
-        y: 0,
-        z: 0,
-      },'green');
-      this.linesFigBlue = new LineFigure(this.$store, 0x20639b, {
-        x: -2,
-        y: 0,
-        z: 2,
-      },'blue');
+      //0xb8d8d8
+
+      var color = 0xbb7093;
+
+      if (this.$store.state.isPublicMode) {
+        switch (this.$route.params.figureIdx) {
+          case "0":
+            console.log("Color ", color);
+            color = 0xbb7093;
+            break;
+          case "1":
+            console.log("Color ", color);
+            color = 0xd4a55e;
+            break;
+          case "2":
+            console.log("Color ", color);
+            color = 0x77c4ce;
+            break;
+          default:
+            color = 0xaaaaaa;
+            break;
+        }
+      }
+
+      this.linesFigRed = new LineFigure(
+        this.$store,
+        color,
+        {
+          x: -2,
+          y: 0,
+          z: 2,
+        },
+        "red"
+      );
+
+      this.linesFigGreen = new LineFigure(
+        this.$store,
+        0xd4a55e,
+        {
+          x: -4,
+          y: 0,
+          z: 0,
+        },
+        "green"
+      );
+
+      this.linesFigBlue = new LineFigure(
+        this.$store,
+        0x77c4ce,
+        {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+        "blue"
+      );
+
       console.log("Init Figures ", this.linesFigRed);
 
       this.meshGroup.add(
@@ -174,7 +215,6 @@ export default {
           this.$store.state.currentFrame >=
           Object.keys(this.$store.state.currentJSONData["red"].frames).length
         ) {
-
           this.$store.commit("SetAnimationStatus", false);
           this.$store.commit("SetCurrentFrame", 0);
           return;
@@ -203,10 +243,9 @@ export default {
       }
       this.renderer.setClearColor(0x000011);
       this.renderer.render(this.scene, this.camera);
-      
     },
     onDataChanged() {
-      console.log('Update JSON Data');
+      console.log("Update JSON Data");
       this.removeFigure();
       //this.$store.commit("SetCurrentFrame", 0);
       this.$store.commit("SetAnimationStatus", false);
@@ -250,5 +289,4 @@ export default {
   width: 100%;
   margin: auto;
 }
-
 </style>
