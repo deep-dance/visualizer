@@ -61,7 +61,7 @@ export default {
       this.scene.add(plane);
 
       //lights
-      const pointLight = new THREE.DirectionalLight(0xffffff, 1);
+      const pointLight = new THREE.PointLight(0xffffff, 3);
       pointLight.position.set(0, 6, 0);
       pointLight.castShadow = true;
       pointLight.shadow.mapSize.width = 1024; // default
@@ -69,6 +69,11 @@ export default {
       pointLight.shadow.camera.near = 1; // default
       pointLight.shadow.camera.far = 1000; // default
       this.scene.add(pointLight);
+
+      //Fog
+      var fogColor = new THREE.Color(0x333333);
+      this.scene.fog = new THREE.Fog(fogColor, 5, 20);
+      this.scene.background = fogColor;
 
       //Container for lines and points
       this.meshGroup = new THREE.Group();
@@ -89,7 +94,9 @@ export default {
         this.container.clientWidth,
         this.container.clientHeight
       );
-      this.renderer.setClearColor( 0x000011, 1);
+      //this.renderer.setClearColor( 0x333333, 1);
+      
+
       this.container.appendChild(this.renderer.domElement);
     },
 
@@ -105,7 +112,7 @@ export default {
     },
 
     initFigure: function () {
-      this.linesFigRed = new LineFigure(this.$store, 0xed553b, {
+      this.linesFigRed = new LineFigure(this.$store, 0xb8d8d8, {
         x: 0,
         y: 0,
         z: 0,
