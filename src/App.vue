@@ -55,6 +55,11 @@ export default {
         case "2":
           this.$store.commit("SetJSONData", { data: json_green, key: "red" });
           break;
+        case "3":
+          this.$store.commit("SetJSONData", { data: json_red, key: "red" });
+          this.$store.commit("SetJSONData", { data: json_green, key: "green" });
+          this.$store.commit("SetJSONData", { data: json_blue, key: "blue" });
+          break;
         default:
           this.$store.commit("SetJSONData", { data: json_red, key: "red" });
           break;

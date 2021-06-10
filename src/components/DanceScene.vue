@@ -130,7 +130,6 @@ export default {
             color = 0x77c4ce;
             break;
           default:
-            color = 0xaaaaaa;
             break;
         }
       }
