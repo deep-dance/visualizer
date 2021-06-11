@@ -10,10 +10,9 @@ addMinVal: bool </br>
 <i>Adds the small y-position per frame to all keypoints so that the figure is always above the ground. </i>
 
 slowMo: bool</br>
-<i>Slow Motion</i>
+<i>True: 25 fps</i></br>
+<i>False: 50 fps</i>
 
-fps: int</br>
-<i>Frames per seocnd. We used 25.</i>
 
 
 isPublicMode: bool</br>
