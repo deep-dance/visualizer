@@ -1,5 +1,9 @@
 # Visualizer
-Keypoint sequence visualizer for Web
+Visualizes up to three 3D keypoint sequences that can be uploaded as a json file. The figures are visualized in a 3D scene in which you can navigate with mouse or touchpad. 
+
+
+![alt text](https://github.com/deep-dance/visualizer/blob/main/SceneScreenshot.png)
+
 
 ## Options (in store.js)
 addMinVal: bool </br>
