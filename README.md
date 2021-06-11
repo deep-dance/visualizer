@@ -20,7 +20,7 @@ isPublicMode: bool</br>
 <i>False: UI for JSON file upload for three figures. Upload for the red figure is necessary. </i></br>
 <i>True: Default sequence is used. </i>
 
-## Route Parameters (only in PublicMode)
+#### Route Parameters (only in PublicMode)
 /0 - <i>Only red figure</i></br>
 /1 - <i>Only yellow figure</i></br>
 /2 - <i>Only blue figure</i></br>
