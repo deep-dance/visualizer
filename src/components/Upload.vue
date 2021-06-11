@@ -65,13 +65,13 @@ input[type="file"] {
 }
 
 .red {
-  background-color: #ed553b !important;
+  background-color: #bb7093 !important;
 }
 .green {
-  background-color: #3caea3 !important;
+  background-color: #d4a55e !important;
 }
 .blue {
-  background-color: #20639b !important;
+  background-color: #77c4ce !important;
 }
 .frames {
   float: left;
