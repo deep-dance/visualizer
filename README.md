@@ -1,7 +1,7 @@
-# visualizer
+# Visualizer
 Keypoint sequence visualizer for Web
 
-## Options
+## Options (in store.js)
 addMinVal: bool </br>
 <i>Adds the small y-position per frame to all keypoints so that the figure is always above the ground. </i>
 
@@ -15,6 +15,12 @@ fps: int</br>
 isPublicMode: bool</br>
 <i>False: UI for JSON file upload for three figures. Upload for the red figure is necessary. </i></br>
 <i>True: Default sequence is used. </i>
+
+## Route Parameters (only in PublicMode)
+/0 - <i>Only red figure</i></br>
+/1 - <i>Only yellow figure</i></br>
+/2 - <i>Only blue figure</i></br>
+/3 - <i>All figures</i></br>
 
 ## Dataformat Dance Sequences
 Bones structure references to indices of key points in frames array.</br>
