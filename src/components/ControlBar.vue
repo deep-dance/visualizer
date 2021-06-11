@@ -1,5 +1,5 @@
 <template>
-  <div id="playhead">
+  <div id="playhead" v-if="this.$store.state.currentJSONData['red'] != null">
     <div
       v-if="this.$store.state.currentJSONData['red'] != null"
       id="controlBar"
@@ -131,10 +131,22 @@ export default {
   height: 50px;
   position: absolute;
   top: 85vh;
-  left: 25%;
-  width: 50%;
+  left: 20%;
+  width: 60%;
   background-color: rgba(0, 0, 0, 0.5);
   color: #d5d5d5;
+}
+@media (max-width: 1200px) {
+  #playhead {
+    width: 70%;
+    left: 15%;
+  }
+}
+@media (max-width: 1000px) {
+  #playhead {
+    width: 80%;
+    left: 10%;
+  }
 }
 @media (max-width: 760px) {
   #playhead {

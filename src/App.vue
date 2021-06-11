@@ -20,13 +20,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import DanceScene from "./components/DanceScene.vue";
 import ControlBar from "./components/ControlBar";
 import Upload from "./components/Upload";
-
-import json_red from "./deepdance_170421_red.json";
-import json_blue from "./deepdance_170421_blue.json";
-import json_green from "./deepdance_170421_green.json";
 
 export default {
   name: "App",
@@ -41,32 +39,37 @@ export default {
     toogleSlowMo: function () {
       this.$store.commit("SetSlowMo", !this.$store.state.slowMo);
     },
+    loadJSON: function(figure, key) {
+      var publicPath = process.env.NODE_ENV === 'production'
+        ? '/deep-dance-visualizer/'
+        : '/';
+      axios.get(publicPath + 'deepdance_170421_' + figure + '_0_15001.json').then(response => {
+        this.$store.commit("SetJSONData", { data: response.data, key: key });
+      });
+    }
   },
   mounted() {
     if (this.$store.state.isPublicMode) {
       console.log(this.$route.params);
       switch (this.$route.params.figureIdx) {
         case "0":
-          this.$store.commit("SetJSONData", { data: json_red, key: "red" });
+          this.loadJSON('red', 'red');
           break;
         case "1":
-          this.$store.commit("SetJSONData", { data: json_blue, key: "red" });
+          this.loadJSON('blue', 'red');
           break;
         case "2":
-          this.$store.commit("SetJSONData", { data: json_green, key: "red" });
+          this.loadJSON('green', 'red');
           break;
         case "3":
-          this.$store.commit("SetJSONData", { data: json_red, key: "red" });
-          this.$store.commit("SetJSONData", { data: json_green, key: "green" });
-          this.$store.commit("SetJSONData", { data: json_blue, key: "blue" });
+          this.loadJSON('red', 'red');
+          this.loadJSON('blue', 'blue');
+          this.loadJSON('green', 'green');
           break;
         default:
-          this.$store.commit("SetJSONData", { data: json_red, key: "red" });
+          this.loadJSON('red', 'red');
           break;
       }
-      //this.$store.commit("SetJSONData", {data:json_red, key:"red"});
-      // this.$store.commit("SetJSONData", {data:json_blue, key:"blue"});
-      // this.$store.commit("SetJSONData", {data:json_green, key:"green"});
     }
   },
 };
