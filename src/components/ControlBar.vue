@@ -1,7 +1,7 @@
 <template>
-  <div id="playhead" v-if="this.$store.state.currentJSONData['red'] != null">
+  <div id="playhead" v-if="this.$store.getters.canPlay">
     <div
-      v-if="this.$store.state.currentJSONData['red'] != null"
+      v-if="this.$store.getters.canPlay"
       id="controlBar"
     >
       <PlayIcon
@@ -20,14 +20,13 @@
         <div class="minutes">
           {{ this.convertFrameToTime(this.$store.state.currentFrame) }}
           /
-          {{ this.convertFrameToTime(
-            Object.keys(this.$store.state.currentJSONData["red"].frames).length) 
+          {{ this.convertFrameToTime(this.$store.getters.maxFrames) 
           }}
           <span v-if="!this.$store.state.isPublicMode">
             ({{ this.$store.state.currentFrame }}
               /
             {{
-              Object.keys(this.$store.state.currentJSONData["red"].frames).length
+              this.$store.getters.maxFrames
             }})
           </span>
           
@@ -90,11 +89,15 @@ export default {
         else {
           var timestamp = (minutes * 60) + seconds;
           var frame = timestamp * this.$store.state.fps;
-          var maxFrames = Object.keys(this.$store.state.currentJSONData["red"].frames).length;
-          if (frame > maxFrames)
+          if (frame > this.$store.getters.maxFrames) {
             this.alertOutOfRange();
-          else
+          } else {
             this.$store.commit("SetCurrentFrame", frame);
+
+            var slice = 0;
+            alert("Slice implementation missing.");
+            this.$store.commit("SetCurrentSlice", this.$store.state.currentSlice + 1);
+          }
         }
         
       }

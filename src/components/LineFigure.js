@@ -13,7 +13,7 @@ class LineFigure {
 
         this.lineMaterial = new THREE.LineBasicMaterial({
             color: color,
-            linewidth: 10,
+            linewidth: 1,
             linecap: "round", //ignored by WebGLRenderer
             linejoin: "round", //ignored by WebGLRenderer
         });
@@ -27,10 +27,11 @@ class LineFigure {
     }
 
     CreateLines(idx) {
-        if (this.store.state.currentJSONData[this.key] == null || this.store.state.currentJSONData[this.key].frames[idx] == null) {
-            return
+        if (!this.store.getters.bufferLoaded(this.key) || 
+            !this.store.getters.frameLoaded(this.key, idx)) {
+            return;
         }
-        var frame = this.store.state.currentJSONData[this.key].frames[idx];
+        var frame = this.store.getters.bufferedFrame(this.key, idx);
         var min = 0;
         if (this.store.state.addMinVal) {
             frame.forEach(bone => {
@@ -41,7 +42,7 @@ class LineFigure {
         }
         this.bonesShadow = [];
         this.bones= [];
-        Object.values(this.store.state.currentJSONData[this.key].bones).forEach(
+        Object.values(this.store.getters.bufferedBones(this.key)).forEach(
             (bone, boneIdx) => {
                 this.bones[boneIdx] = [];
                 this.bonesShadow[boneIdx] = [];

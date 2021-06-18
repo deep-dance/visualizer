@@ -54,7 +54,7 @@ def read_json(files):
     return input
 
 def write_json(data, dir, filename):
-    with open(filename, 'w') as outfile:
+    with open(dir + '/' + filename, 'w') as outfile:
         json.dump(data, outfile)
 
 if __name__ == '__main__':
@@ -64,7 +64,8 @@ if __name__ == '__main__':
         (dir, base) = get_base(args.files[0])
         input = read_json(args.files)
 
-        slices = 6
+        slices = 240
+        current_slice = 0
         frames = input[0]['frames']
         bones = input[0]['bones']
         max_frames = len(frames)
@@ -83,7 +84,8 @@ if __name__ == '__main__':
                 
                 data['bones'] = bones
 
-                filename = base + '_' + str(index_begin) + '_' + str(index) + '.json'
+                # filename = base + '_' + str(index_begin) + '_' + str(index) + '.json'
+                filename = base + '_' + str(current_slice) + '.json'
                 print('Writing', len(data['frames']), 'frames to JSON file', dir + '/' + filename)
                 write_json(data, dir, filename)
 
@@ -91,6 +93,7 @@ if __name__ == '__main__':
                 data = init_data()
                 index_in_slice = 0
                 index_begin = index + 1
+                current_slice = current_slice + 1
                 write = True
             if (not write):
                 index_in_slice += 1

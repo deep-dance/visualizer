@@ -35,6 +35,7 @@ export default {
     onReaderLoad: function (event) {
       var obj = JSON.parse(event.target.result);
       this.$store.commit("SetJSONData", {data:obj,key:this.dataKey});
+      this.$store.commit("SetReady", true);
     },
   },
 };

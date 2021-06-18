@@ -198,8 +198,7 @@ export default {
         this.renderer.render(this.scene, this.camera);
         return;
       }
-      var slowMo = this.$store.state.slowMo;
-      var interval = 1 / (slowMo ? 25 : 50);
+      var interval = 1 / this.$store.state.fps;
 
       this.delta += this.clock.getDelta();
       if (this.delta > interval) {
@@ -212,7 +211,7 @@ export default {
         //Reset Animation on End
         if (
           this.$store.state.currentFrame >=
-          Object.keys(this.$store.state.currentJSONData["red"].frames).length
+          this.$store.maxFrames
         ) {
           this.$store.commit("SetAnimationStatus", false);
           this.$store.commit("SetCurrentFrame", 0);
@@ -256,21 +255,21 @@ export default {
     this.animate();
 
     this.$store.watch(
-      (state) => state.currentJSONData["red"],
+      (state) => state.bufferLoaded['red'],
       (newValue, oldValue) => {
         this.onDataChanged();
       }
     );
 
     this.$store.watch(
-      (state) => state.currentJSONData["green"],
+      (state) => state.bufferLoaded['blue'],
       (newValue, oldValue) => {
         this.onDataChanged();
       }
     );
 
     this.$store.watch(
-      (state) => state.currentJSONData["blue"],
+      (state) => state.bufferLoaded['green'],
       (newValue, oldValue) => {
         this.onDataChanged();
       }

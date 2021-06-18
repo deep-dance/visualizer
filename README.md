@@ -9,12 +9,6 @@ Visualizes up to three 3D keypoint sequences that can be uploaded as a json file
 addMinVal: bool </br>
 <i>Adds the small y-position per frame to all keypoints so that the figure is always above the ground. </i>
 
-slowMo: bool</br>
-<i>True: 25 fps</i></br>
-<i>False: 50 fps</i>
-
-
-
 isPublicMode: bool</br>
 <i>False: UI for JSON file upload for three figures. Upload for the red figure is necessary. </i></br>
 <i>True: Default sequence is used. </i>
