@@ -34,7 +34,7 @@ export const store = new Vuex.Store({
         slices: 240,
         currentSlice: 0,
         isPublicMode: true,
-        isBufferedMode: true, 
+        isBufferedMode: false, 
     },
     getters: {
         canPlay: (state) => {
