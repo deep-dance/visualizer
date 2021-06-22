@@ -1,5 +1,6 @@
 <template>
-  <div id="playhead" v-if="this.$store.getters.canPlay">
+  <!-- <div id="playhead" v-if="this.$store.getters.canPlay"> -->
+    <div id="playhead" v-if="false">
     <div
       v-if="this.$store.getters.canPlay"
       id="controlBar"

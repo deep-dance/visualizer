@@ -54,6 +54,7 @@ export default {
       var id = 'deepdance_170421_' + figure;
       axios.get(this.publicPath() + id + '/' + id + '_0.json').then(response => {
         this.$store.commit("SetJSONData", { data: response.data, key: key });
+        console.log("Buffer size:", this.$store.getters.bufferSize);
       });
     },
     loadSlice: function(figure, key, seq) {
@@ -64,22 +65,20 @@ export default {
     },
     onCurrentFrame: function(oldFrame, newFrame) {
       var bufferIdx = newFrame % this.$store.getters.bufferSize;
-      console.log("Frame in buffer:", bufferIdx);
-      console.log("Buffer size:", this.$store.getters.bufferSize);
-      console.log("Slice:", this.$store.state.currentSlice);
+      // console.log("Frame in buffer:", bufferIdx);
+      // console.log("Slice:", this.$store.state.currentSlice);
 
       if (bufferIdx == 1) {
         // load next buffer
         this.loadSlice('red', 'red', this.$store.state.currentSlice + 1);
+        this.loadSlice('blue', 'blue', this.$store.state.currentSlice + 1);
+        this.loadSlice('green', 'green', this.$store.state.currentSlice + 1);
       }
       if (bufferIdx == this.$store.getters.bufferSize - 1) {
-        // switch buffer
-        var nextBuffer = {
-          red: this.$store.state.nextBuffer['red'],
-          blue: this.$store.state.nextBuffer['blue'],
-          green: this.$store.state.nextBuffer['green'],
-        }
-        this.$store.commit("UpdateCurrentBuffer", nextBuffer);
+        this.$store.commit("UpdateCurrentBuffer", { data: this.$store.state.nextBuffer['red'], key: 'red' });
+        this.$store.commit("UpdateCurrentBuffer", { data: this.$store.state.nextBuffer['blue'], key: 'blue' });
+        this.$store.commit("UpdateCurrentBuffer", { data: this.$store.state.nextBuffer['green'], key: 'green' });
+        
         var nextSlice = this.$store.state.currentSlice + 1;
         this.$store.commit("SetCurrentSlice", nextSlice);
       }
@@ -110,7 +109,7 @@ export default {
           if (this.$store.state.isBufferedMode)
             this.initSlice('green', 'red');
           else
-            this.loadJSON('gree', 'red');
+            this.loadJSON('green', 'red');
           break;
         case "3":
           if (this.$store.state.isBufferedMode) {
