@@ -12,19 +12,16 @@ export default {
   name: "ProgressBar",
   components: {},
   computed: {
-    currentClipLength: function () {
-      return Object.keys(this.$store.state.currentJSONData['red'].frames).length;
-    },
     progressWidth: function () {
       var currentFrame = this.$store.state.currentFrame;
-      return (500 * currentFrame) / this.currentClipLength;
+      return (500 * currentFrame) / this.$store.getters.maxFrames;
     },
   },
 
   methods: {
     SetFrame(event) {
         var x = event.clientX - this.$refs.progressbar.getBoundingClientRect().left
-        var frame = Math.round((this.currentClipLength * x) / 500);
+        var frame = Math.round((this.$store.getters.maxFrames * x) / 500);
         console.log("Progress: ", frame);
         this.$store.commit("SetCurrentFrame", frame);
     },
